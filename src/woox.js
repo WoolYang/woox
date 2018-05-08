@@ -9,8 +9,8 @@ import { fork, take, select, call, all, put, race, takeEvery, takeLatest } from 
 
 class Woox {
     constructor() {
-        this.isDebug =false;
-        this.middleware=[]; //所有中间件
+        this.isDebug = false;
+        this.middleware = []; //所有中间件
         this.sagaMiddleware = {}; //sagas中间件
         this.appReducers = {}; //reducers集合
         this.appActions = []; //actions集合
@@ -19,7 +19,7 @@ class Woox {
         this.errorFn = void 233; //异常抛出
         this._store = null; //store集合
         this.moduleName = {}; //记录模块位置
-    }   
+    }
 
     //错误收集
     onError(fn) {
@@ -28,10 +28,10 @@ class Woox {
 
     //任务加载
     *rootWatcher() {
-        while(1){
+        while (1) {
             const { type, ...others } = yield take(this.appActions);
             if (this.isDebug) {
-                console.info(`[saga-action-types]:  '${type}' in model '${this.moduleName[type]}'`,'payload:',others );
+                console.info(`[saga-action-types]:  '${type}' in model '${this.moduleName[type]}'`, 'payload:', others);
             }
 
             const fn = this.appEffects[type];
@@ -50,13 +50,13 @@ class Woox {
     *rootSaga() {
         yield all([fork(this.rootWatcher.bind(this))]);
     }
- 
+
     //core，聚合模板
     model(Modules) {
         const models = Modules;
-        Object.keys(models).forEach(key=>{
+        Object.keys(models).forEach(key => {
             const current = models[key];
-            
+
             const modelstate = current.state || {};
 
             const namespace = current.namespace;
