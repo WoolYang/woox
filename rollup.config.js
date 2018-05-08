@@ -1,50 +1,62 @@
 import babel from 'rollup-plugin-babel';
-import resolve from 'rollup-plugin-node-resolve'
+import nodeResolve from 'rollup-plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs'
 import uglify from 'rollup-plugin-uglify'
-import { sizeSnapshot } from 'rollup-plugin-size-snapshot'
+import replace from 'rollup-plugin-replace'
 
-function createConfig(entry, out, name) {
-    return [
-        {
-            input: `./src/${entry}.js`,
-            output: { file: `dist/${out}.es.js`, format: 'es' },
-        },
-        {
-            input: `./src/${entry}.js`,
-            output: { file: `dist/${out}.cjs.js`, format: 'cjs' },
-        },
-        {
-            input: `./src/${entry}.js`,
-            output: {
-                file: `dist/${out}.umd.js`,
-                format: 'umd',
-                name
-            },
-            plugins: [
-                resolve(),
-                commonjs(),
-                sizeSnapshot(),
-                uglify({ compress: true, mangle: { toplevel: true } }),
-            ],
-        },
-    ]
+const env = process.env.NODE_ENV
+
+const config = {
+    input: 'src/index.js',
+    plugins: [],
+    external: ['react', 'react-dom', 'redux', 'react-redux', 'redux-saga/effects', 'redux-saga', 'redux-logger']
 }
 
-export default [
-    ...createConfig('index', 'woox', 'Woox'),
-]
+if (env === 'es' || env === 'cjs') {
+    config.output = { format: env, indent: false }
+    config.plugins.push(
+        babel()
+    )
+}
 
-/* export default {
-    input: 'src/index.js',
-    output: {
-        file: 'dist/bundle.js',
-        format: 'cjs'
-    },
-    plugins: [
-        babel(
-            { exclude: 'node_modules/**' },
-            sizeSnapshot()
-        )
-    ]
-}; */
+if (env === 'development' || env === 'production') {
+
+    config.output = { format: 'umd', name: 'Woox', indent: false }
+
+    config.output.globals = {
+        'react': 'React',
+        'react-dom': 'ReactDOM',
+        'redux': 'Redux',
+        'react-redux': 'ReactRedux',
+        'redux-saga': 'ReduxSaga',
+        'redux-logger': 'ReduxLogger',
+        'redux-saga/effects': 'Effects'
+    }
+
+    config.plugins.push(
+        nodeResolve({
+            jsnext: true
+        }),
+        babel({
+            exclude: 'node_modules/**'
+        }),
+        replace({
+            'process.env.NODE_ENV': JSON.stringify(env)
+        })
+    )
+}
+
+if (env === 'production') {
+    config.plugins.push(
+        uglify({
+            compress: {
+                pure_getters: true,
+                unsafe: true,
+                unsafe_comps: true,
+                warnings: false
+            }
+        })
+    )
+}
+
+export default config

@@ -1,0 +1,23 @@
+{
+    "presets": [
+        "react", ["env", {
+            "modules": false,
+            "loose": true
+        }]
+    ],
+    "plugins": [
+        "transform-object-rest-spread"
+    ],
+    "env": {
+        "commonjs": {
+            "presets": [
+                [
+                    "env",
+                    {
+                        "loose": true
+                    }
+                ]
+            ]
+        }
+    }
+}

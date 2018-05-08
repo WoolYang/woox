@@ -1,3 +1,3 @@
-import Woox from './Woox';
+import Woox from './woox';
 
 export const App = Woox;
