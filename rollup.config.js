@@ -15,7 +15,9 @@ const config = {
 if (env === 'es' || env === 'cjs') {
     config.output = { format: env, indent: false }
     config.plugins.push(
-        babel()
+        babel({
+            plugins: ['external-helpers'],
+        })
     )
 }
 
@@ -30,7 +32,7 @@ if (env === 'development' || env === 'production') {
         'react-redux': 'ReactRedux',
         'redux-saga': 'ReduxSaga',
         'redux-logger': 'ReduxLogger',
-        'redux-saga/effects': 'Effects'
+        'redux-saga/effects': 'SagaEffects'
     }
 
     config.plugins.push(
@@ -38,7 +40,8 @@ if (env === 'development' || env === 'production') {
             jsnext: true
         }),
         babel({
-            exclude: 'node_modules/**'
+            exclude: 'node_modules/**',
+            plugins: ['external-helpers']
         }),
         replace({
             'process.env.NODE_ENV': JSON.stringify(env)
