@@ -54,9 +54,9 @@ class Woox {
     //core，聚合模板
     model(Modules) {
         const models = Modules;
-        /*         if (models == null || typeof models !== 'object') {
-                    throw new Error('module must be object or array');
-                } */
+        if (models == null || typeof models !== 'object') {
+            throw new SyntaxError('module must be object or array');
+        }
 
         Object.keys(models).forEach(key => {
             const current = models[key];

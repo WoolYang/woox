@@ -1,4 +1,4 @@
-export default {
+const Model1 = {
     namespace: 'model',
     state: {
         data: [],
@@ -23,3 +23,5 @@ export default {
         }
     }
 };
+
+export default [Model1];
