@@ -99,16 +99,16 @@ class Woox {
     }
 
     //加载router
-    router(RouterModel) {
-        this.JsxElement = <RouterModel />;
-    }
-
-    run(DOMNode, isDebug) {
+    /*     router(RouterModel) {
+            this.JsxElement = <RouterModel />;
+        }
+     */
+    run(Component, DOMNode, isDebug) {
         if (isDebug === true) {
             this.middleware.push(createLogger());
             this.isDebug = true;
         }
-
+        this.JsxElement = <Component />;
         this.sagaMiddleware = createSagaMiddleware(this.rootSaga);
         this.middleware.push(this.sagaMiddleware);
         const store = createStore(combineReducers(this.appReducers), applyMiddleware(...this.middleware));
