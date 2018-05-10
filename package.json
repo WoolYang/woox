@@ -14,7 +14,8 @@
     "pretest": "npm run build:commonjs",
     "test": "cross-env BABEL_ENV=commonjs jest",
     "test:watch": "npm test -- --watch",
-    "test:cov": "npm test -- --coverage"
+    "test:cov": "npm test -- --coverage",
+    "codecov": "codecov"
   },
   "repository": {
     "type": "git",
