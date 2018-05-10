@@ -91,11 +91,13 @@ class Woox {
     }
 
     //创建store
-    injectRun(JsxElement) {
+    injectRun(Component) {
+        this.JsxElement = <Component />;
+        this.sagaMiddleware = createSagaMiddleware(this.rootSaga);
         const store = createStore(combineReducers(this.appReducers), applyMiddleware(this.sagaMiddleware));
         this.sagaMiddleware.run(this.rootSaga.bind(this));
 
-        return <Provider store={store}>{JsxElement}</Provider>;
+        return <Provider store={store}>{this.JsxElement}</Provider>;
     }
 
     //加载router

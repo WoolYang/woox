@@ -2,18 +2,10 @@ import { App } from '../'
 import { Router } from './helpers/router'
 import Models from './helpers/models';
 
-describe('运行App.router', () => {
-    it('测试JsxElement加载模块', () => {
-        App.router(Router)
-        expect(typeof App.JsxElement.type).toEqual('function');
-    })
-})
-
 describe('运行App.onError', () => {
     it('测试errorFn', () => {
         expect(App.errorFn).toEqual(undefined);
         App.onError(e => { return e })
-        expect(typeof App.errorFn).toEqual('function');
         expect(typeof App.errorFn).toEqual('function');
         expect(App.errorFn('error')).toEqual('error');
     })
@@ -37,12 +29,12 @@ describe('运行App.model参数', () => {
 
     it('model重复namespace', () => {
         const model = { namespace: 'test', reducer: {}, effects: {} }
-        expect(() => App.model(model, model)).toThrow(SyntaxError)
+        expect(() => App.model([model, model])).toThrow(SyntaxError)
     })
 
     it('model中appReducers记录', () => {
         App.model(Models)
-        expect(Object.keys(App.appReducers).length).toBe(1)
+        expect(Object.keys(App.appReducers).length).toBe(2)
         expect(typeof App.appReducers.model).toEqual('function');
     })
 
@@ -56,18 +48,9 @@ describe('运行App.model参数', () => {
         expect(typeof App.appEffects.modelRequest).toEqual('function');
     })
 
-    it('sagas', () => {
-        { type: 'dashboardRequest' }
-        const generator = App.rootWatcher();
-        // generator.next()
-        generator.next()
-        console.log(generator.next())
-        /*       generator.next()
-              console.log(generator.next().done)
-              generator.next()
-              console.log(generator.next().done)
-              generator.next()
-              console.log(generator.next().done) */
-
+    it('组件加载injectRun', () => {
+        App.injectRun(Router);
+        expect(typeof App.JsxElement.type).toEqual('function');
     })
+
 })
