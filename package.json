@@ -1,6 +1,6 @@
 {
   "name": "woox",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "a Lightweight and convenient data flow management package library based on redux+redux-saga",
   "main": "lib/woox.js",
   "module": "es/woox.js",
@@ -39,6 +39,7 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
+    "codecov": "^3.0.2",
     "cross-env": "^5.1.4",
     "jest": "^22.4.3",
     "react": "^16.3.2",
