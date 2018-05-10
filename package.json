@@ -59,6 +59,7 @@
     "rollup-plugin-uglify": "^3.0.0"
   },
   "jest": {
-    "testRegex": "(/test/.*\\.spec.js)$"
+    "testRegex": "(/test/.*\\.spec.js)$",
+    "coveragePathIgnorePatterns": ["<rootDir>/test/helpers/"]
   }
 }
