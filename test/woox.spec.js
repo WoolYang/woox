@@ -60,7 +60,7 @@ describe('运行App.model参数', () => {
         { type: 'dashboardRequest' }
         const generator = App.rootWatcher();
         // generator.next()
-        // generator.next()
+        generator.next()
         console.log(generator.next())
         /*       generator.next()
               console.log(generator.next().done)
