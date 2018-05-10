@@ -20,4 +20,6 @@ install:
 script:
   - npm run test:cov
 
-  - npm run codecov
+after_success:
+  - codecov
+  - bash <(curl -s https://codecov.io/bash) -t 25124aef-9e66-49f5-90f2-4b48b7ca602f
