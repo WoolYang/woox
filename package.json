@@ -1,6 +1,6 @@
 {
   "name": "woox",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "a Lightweight and convenient data flow management package library based on redux+redux-saga",
   "main": "lib/woox.js",
   "module": "es/woox.js",
