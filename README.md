@@ -11,7 +11,7 @@
   </a>
 </p> 
 
-轻量便捷数据流封装管理库，基于redux+redux-saga
+轻量便捷数据流封装管理库，基于react+redux-saga
 
 ## 1.安装
  npm install woox --save
@@ -26,7 +26,7 @@
    
    App.run(Routes,document.getElementById('app'), true);
  ```
- woox集成redux+redux+redux-sagas完成大量配置工作,运行woox仅需引入App，调用model API加载models，run挂载组件即可。
+ woox集成react+redux-sagas完成大量配置工作,运行woox仅需引入App，调用model API加载models，run挂载组件即可。
  
  ```js
 import { getCheckLogin } from '../../api/api';
@@ -62,4 +62,4 @@ export default {
     }
 };
  ```
- model文件汇集了reducer和effects，减少胶水代码的同时保证了redux原汁原味的开发体验。
+ model文件整合了reducer和effects，减少胶水代码的同时保证了redux原汁原味的开发体验。
